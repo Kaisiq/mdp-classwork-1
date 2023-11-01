@@ -36,7 +36,7 @@ jobs:
           path: .
       - name: Build Docker image
         run: |
-           docker build -t mdp-classwork-1 .
+           docker build -t mdp-classwork-1 src/
   Push:
     name: Push docker image to dockerhub
     runs-on: ubuntu-latest
