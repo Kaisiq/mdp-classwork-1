@@ -1,6 +1,6 @@
-FROM ubuntu:latest as builder
-RUN apt-get update -y
-RUN apt-get install -y python3 python3-pip python3-dev build-essential
+FROM alpine
+RUN apk update
+RUN apk add python3 py3-pip python3-dev
 COPY requirements.txt /usr/src/app/
 RUN pip3 install -r /usr/src/app/requirements.txt
 COPY app.py /usr/src/app/
