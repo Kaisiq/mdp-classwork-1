@@ -3,9 +3,8 @@
 name: Docker CI
 
 # Controls when the workflow will run
-on:
+on: push
   # Triggers the workflow on push or pull request events but only for the "main" branch
-  push
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -40,6 +39,7 @@ jobs:
            docker build -t mdp-classwork-1 .
   Push:
     name: Push docker image to dockerhub
+    runs-on: ubuntu-latest
     needs: Build
     steps:
       # Runs a set of commands using the runners shell
