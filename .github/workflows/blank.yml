@@ -46,5 +46,5 @@ jobs:
       - name: push
         run: |
           echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-          docker tag mdp-classwork-1 kaisiq/mdp-classwork-1:latest
+          docker tag mdp-classwork-1 kaisiq/mdp-classwork-1
           docker push kaisiq/mdp-classwork-1
