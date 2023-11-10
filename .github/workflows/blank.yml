@@ -87,7 +87,9 @@ jobs:
           name: code
           path: .
       - name: Run Python tests
-        run: python3 -m unittest ./src/app_test.py
+        run: |
+          pip3 install -r src/requirements.txt
+          python3 -m unittest ./src/app_test.py
 
 
 
