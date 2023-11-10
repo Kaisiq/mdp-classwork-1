@@ -8,6 +8,9 @@ on: push
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+
+
+
   sonarcloud:
     name: Test Code with SonarCloud
     runs-on: ubuntu-latest
@@ -21,6 +24,12 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+
+
+
+
+
   snyk-test:
     name: Test Code with Snyk
     needs: Clone
@@ -43,6 +52,10 @@ jobs:
           snyk test --file=requirements.txt --command=python3
           snyk monitor --file=requirements.txt --command=python3
         
+
+
+
+
   Clone:
     # The type of runner that the job will run on
     name: Clone repo
@@ -59,9 +72,32 @@ jobs:
         with:
           name: code
           path: .
+
+
+
+  Test:
+    # The type of runner that the job will run on
+    name: Run Code Tests
+    runs-on: ubuntu-latest
+    needs: [Clone,sonarcloud,snyk-test]
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Download code
+        uses: actions/download-artifact@v3
+        with: 
+          name: code
+          path: .
+      - name: Run Python tests
+        run: python3 -m unittest src/app_test.py
+
+
   Build-and-Push:
     runs-on: ubuntu-latest
-    needs: Clone
+    needs: Test
     steps:
       - name: Download code
         uses: actions/download-artifact@v3
