@@ -27,8 +27,7 @@ jobs:
     steps:
       - name: Install Snyk
         run: |
-          sudo apt-get update
-          sudo apt-get install snyk
+          npm install snyk
       - name: Login to Snyk
         run: snyk auth ${{ secrets.SNYK_TOKEN }}
       - name: Run Snyk to check for vulnerabilities
