@@ -25,13 +25,22 @@ jobs:
     name: Test Code with Snyk
     runs-on: ubuntu-latest
     steps:
+      - name: Download code
+        uses: actions/download-artifact@v3
+        with: 
+          name: code
+          path: .
       - name: Install Snyk
         run: |
           npm install snyk -g
       - name: Login to Snyk
         run: snyk auth ${{ secrets.SNYK_TOKEN }}
       - name: Run Snyk to check for vulnerabilities
-        run: snyk test
+        run: |
+          cd src
+          pip3 install -r requirements.txt
+          snyk test --file=requirements.txt --command=python3
+          snyk monitor --file=requirements.txt --command=python3
         
   Clone:
     # The type of runner that the job will run on
