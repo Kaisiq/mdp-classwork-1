@@ -87,7 +87,7 @@ jobs:
           name: code
           path: .
       - name: Run Python tests
-        run: python3 -m unittest src/app_test.py
+        run: python3 -m unittest ./src/app_test.py
 
 
 
