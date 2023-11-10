@@ -23,6 +23,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   snyk-test:
     name: Test Code with Snyk
+    needs: Clone
     runs-on: ubuntu-latest
     steps:
       - name: Download code
