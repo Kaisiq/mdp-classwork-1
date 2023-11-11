@@ -60,7 +60,7 @@ jobs:
       - name: Install editorconfig-checker 
         run: pip3 install editorconfig-checker 
       - name: run editorconfig-checker to code
-        run: editorconfig-checker src
+        run: ec .
 
 
   sonarcloud:
