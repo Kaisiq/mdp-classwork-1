@@ -79,7 +79,9 @@ jobs:
           npm i cli-markdown -g
       - name: Create markdown.js
         run: |
-          echo "const cliMd = require('cli-markdown'); \n const md = '# Hello World' \n console.log(cliMd(md));" >> markdown.js
+          echo "const cliMd = require('cli-markdown');\ 
+            const md = '# Hello World'\
+            console.log(cliMd(md));" >> markdown.js
       - name: Run cli-markdown with nodejs
         run: node markdown.js
 
