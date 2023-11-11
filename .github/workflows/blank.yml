@@ -81,7 +81,7 @@ jobs:
         run: |
           echo "const cliMd = require('cli-markdown'); \n const md = '# Hello World' \n console.log(cliMd(md));" >> markdown.js
       - name: Run cli-markdown with nodejs
-        run: npm run markdown.js
+        run: node markdown.js
 
 
   sonarcloud:
