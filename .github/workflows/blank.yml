@@ -63,6 +63,27 @@ jobs:
         run: ec ./.editorconfig
 
 
+
+  cli-markdown:
+    name: Check makrdown files
+    needs: editorconfig
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v3
+        with: 
+          name: code
+          path: .
+      - name: Install Cli-markdown
+        run: |
+          npm i cli-markdown -g
+      - name: Create markdown.js
+        run: |
+          echo "const cliMd = require('cli-markdown'); \n const md = '# Hello World' \n console.log(cliMd(md));" >> markdown.js
+      - name: Run cli-markdown with nodejs
+        run: npm run markdown.js
+
+
   sonarcloud:
     name: Test Code with SonarCloud
     runs-on: ubuntu-latest
