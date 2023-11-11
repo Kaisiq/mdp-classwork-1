@@ -151,7 +151,7 @@ jobs:
 
   Build-and-Push:
     runs-on: ubuntu-latest
-    needs: [scan, cli-markdown]
+    needs: [Test, cli-markdown]
     steps:
       - name: Download code
         uses: actions/download-artifact@v3
