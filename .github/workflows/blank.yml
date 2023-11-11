@@ -78,10 +78,9 @@ jobs:
         run: |
           npm i cli-markdown -g
       - name: Create markdown.js
-        run: |
-          echo "const cliMd = require('cli-markdown');\ 
-            const md = '# Hello World'\
-            console.log(cliMd(md));" >> markdown.js
+        run: echo "const cliMd = require('cli-markdown');\ 
+              const md = '# Hello World'\
+              console.log(cliMd(md));" >> markdown.js
       - name: Run cli-markdown with nodejs
         run: node markdown.js
 
@@ -152,7 +151,7 @@ jobs:
 
   Build-and-Push:
     runs-on: ubuntu-latest
-    needs: Test
+    needs: [scan, cli-markdown]
     steps:
       - name: Download code
         uses: actions/download-artifact@v3
