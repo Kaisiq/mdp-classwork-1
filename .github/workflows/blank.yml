@@ -172,7 +172,8 @@ jobs:
         run: |
            docker build -t mdp-classwork-1 src/
       - name: Update python packages
-        run: pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U
+        run: pip install -U libcrypto3
+        run: pip install -U libssl3
       # Runs a set of commands using the runners shell
       - name: Install Trivy
         run: |
