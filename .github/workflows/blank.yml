@@ -172,8 +172,9 @@ jobs:
         run: |
            docker build -t mdp-classwork-1 src/
       - name: Update python packages
-        run: pip install -U libcrypto3
-        run: pip install -U libssl3
+        run: |
+          pip install -U libcrypto3
+          pip install -U libssl3
       # Runs a set of commands using the runners shell
       - name: Install Trivy
         run: |
