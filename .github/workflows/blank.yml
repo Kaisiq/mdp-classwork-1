@@ -89,15 +89,9 @@ jobs:
           name: code
           path: .
       - name: Install Cli-markdown
-        run: |
-          npm i cli-markdown -g
-          npm install cli-markdown
-      - name: Create markdown.js
-        run: echo "const cliMd = require('cli-markdown');
-              const md = '# Hello World';
-              console.log(cliMd(md));" >> markdown.js;
-      - name: Run cli-markdown with nodejs
-        run: node markdown.js
+        run: npm i cli-markdown -g
+      - name: Run cli-markdown
+        run: markdown -Gn *.md
 
 
 
