@@ -169,7 +169,7 @@ jobs:
           name: code
           path: .
       - name: Update packages
-        run: sudo apt-get update
+        run: sudo apt-get upgrade
       - name: Build Docker image
         run: docker build -t mdp-classwork-1 src/
       # Runs a set of commands using the runners shell
