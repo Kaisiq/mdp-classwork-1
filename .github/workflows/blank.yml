@@ -172,7 +172,6 @@ jobs:
         run: apt-get update
       - name: Build Docker image
         run: docker build -t mdp-classwork-1 src/
-      - name: Update python packages
       # Runs a set of commands using the runners shell
       - name: Install Trivy
         run: |
