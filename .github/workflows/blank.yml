@@ -87,11 +87,13 @@ jobs:
         uses: actions/download-artifact@v3
         with: 
           name: code
-          path: .
+          path: code
       - name: Install Cli-markdown
         run: npm i cli-markdown -g
       - name: Run cli-markdown
-        run: markdown *.md
+        run: |
+          cd code
+          markdown *.md
 
 
 
