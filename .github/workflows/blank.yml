@@ -28,7 +28,21 @@ jobs:
           name: code
           path: .
 
+  sonarcloud:
+    name: Test Code with SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
+  
 
 
 
@@ -50,7 +64,7 @@ jobs:
   editorconfig:
     name: Check .editorconfig file
     runs-on: ubuntu-latest
-    needs: flake8_py3
+    needs: Clone
     steps:
       - name: Download code
         uses: actions/download-artifact@v3
@@ -66,39 +80,21 @@ jobs:
 
   cli-markdown:
     name: Check makrdown files
-    needs: editorconfig
+    needs: Clone
     runs-on: ubuntu-latest
     steps:
       - name: Download code
         uses: actions/download-artifact@v3
         with: 
           name: code
-          path: .
+          path: code
       - name: Install Cli-markdown
+        run: npm i cli-markdown -g
+      - name: Run cli-markdown
         run: |
-          npm i cli-markdown -g
-      - name: Create markdown.js
-        run: |
-          echo "const cliMd = require('cli-markdown');\ 
-            const md = '# Hello World'\
-            console.log(cliMd(md));" >> markdown.js
-      - name: Run cli-markdown with nodejs
-        run: node markdown.js
+          cd code
+          markdown *.md
 
-
-  sonarcloud:
-    name: Test Code with SonarCloud
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        # Disabling shallow clone is recommended for improving relevancy of reporting
-        fetch-depth: 0
-    - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 
 
@@ -135,7 +131,7 @@ jobs:
   Test:
     name: Run Code Tests
     runs-on: ubuntu-latest
-    needs: [Clone,sonarcloud,snyk-test]
+    needs: [Clone,sonarcloud,snyk-test,flake8_py3,editorconfig,cli-markdown]
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Download code
