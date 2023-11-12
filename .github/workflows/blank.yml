@@ -91,7 +91,7 @@ jobs:
       - name: Install Cli-markdown
         run: npm i cli-markdown -g
       - name: Run cli-markdown
-        run: markdown -Gn *.md
+        run: markdown *.md
 
 
 
