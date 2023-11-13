@@ -1,5 +1,5 @@
 FROM alpine
-RUN apk update
+RUN apk upgrade
 RUN apk add python3 py3-pip python3-dev
 COPY requirements.txt /usr/src/app/
 RUN pip3 install -r /usr/src/app/requirements.txt
