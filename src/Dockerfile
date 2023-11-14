@@ -1,5 +1,5 @@
-ARG COMMIT_SHA
 FROM alpine:latest
+ARG COMMIT_SHA
 
 LABEL commit_sha=$COMMIT_SHA
 
